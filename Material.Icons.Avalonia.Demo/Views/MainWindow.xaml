@@ -26,42 +26,41 @@
         <vm:MainWindowViewModel />
     </Design.DataContext>
     <Grid ColumnDefinitions="*, *, Auto" RowDefinitions="*, Auto">
-        <ScrollViewer Grid.ColumnSpan="3" VerticalScrollBarVisibility="Visible"
-                      HorizontalScrollBarVisibility="Disabled">
-            <ItemsRepeater Items="{Binding Kinds}"
-                           HorizontalAlignment="Center">
-                <ItemsRepeater.Layout>
-                    <UniformGridLayout />
-                </ItemsRepeater.Layout>
-                <ItemsRepeater.ItemTemplate>
-                    <DataTemplate DataType="models1:PackIconKindGroup">
-                        <models:SelectionWrapper DataSource="{Binding .}"
-                                                 CurrentSelected="{Binding $parent[ItemsRepeater].DataContext.Group, Mode=TwoWay}">
-                            <Border Name="MainBorder">
-                                <DockPanel Margin="2"
-                                           ToolTip.Tip="{Binding Aliases, Converter={StaticResource StringJoinConverter}}"
-                                           Width="64"
-                                           Height="64"
-                                           Background="Transparent">
-                                    <TextBlock
-                                        Text="{Binding Kind}"
-                                        DockPanel.Dock="Bottom"
-                                        FontSize="10"
-                                        HorizontalAlignment="Center" />
+        <ListBox Items="{Binding Kinds}"
+                        HorizontalAlignment="Center" Grid.ColumnSpan="2">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                 <UniformGrid Margin="8" Columns="20" Rows="50"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="models1:PackIconKindGroup">
+                    <models:SelectionWrapper DataSource="{Binding .}"
+                                        CurrentSelected="{Binding $parent[ListBox].DataContext.Group, Mode=TwoWay}">
+                        <Border Name="MainBorder">
+                            <DockPanel Margin="2"
+                                        ToolTip.Tip="{Binding Aliases, Converter={StaticResource StringJoinConverter}}"
+                                        Width="64"
+                                        Height="64"
+                                        Background="Transparent">
+                                <TextBlock
+                                    Text="{Binding Kind}"
+                                    DockPanel.Dock="Bottom"
+                                    FontSize="10"
+                                    HorizontalAlignment="Center" />
 
-                                    <avalonia:MaterialIcon
-                                        Kind="{Binding Kind}"
-                                        VerticalAlignment="Center"
-                                        HorizontalAlignment="Center"
-                                        Width="32"
-                                        Height="32" />
-                                </DockPanel>
-                            </Border>
-                        </models:SelectionWrapper>
-                    </DataTemplate>
-                </ItemsRepeater.ItemTemplate>
-            </ItemsRepeater>
-        </ScrollViewer>
+                                <avalonia:MaterialIcon
+                                    Kind="{Binding Kind}"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Width="32"
+                                    Height="32" />
+                            </DockPanel>
+                        </Border>
+                    </models:SelectionWrapper>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ListBox>
         <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding SearchText}" Watermark="Search" />
         <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding CopyText^}" IsReadOnly="True" />
     </Grid>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reactive.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Avalonia;
@@ -10,20 +11,23 @@ namespace Material.Icons.Avalonia {
         private static readonly Lazy<IDictionary<MaterialIconKind, string>> _dataIndex = new(MaterialIconDataFactory.DataSetCreate);
 
         static MaterialIcon() {
-            KindProperty.Changed.Subscribe(args => (args.Sender as MaterialIcon)?.UpdateData());
+           KindProperty.Changed.Subscribe(args => (args.Sender as MaterialIcon)?.UpdateData());
         }
 
-        public static readonly AvaloniaProperty<MaterialIconKind> KindProperty = AvaloniaProperty.Register<MaterialIcon, MaterialIconKind>(nameof(Kind));
+        MaterialIconKind _kind;
+
+        public static readonly DirectProperty<MaterialIcon, MaterialIconKind> KindProperty = AvaloniaProperty.RegisterDirect<MaterialIcon, MaterialIconKind>(nameof(Kind),
+            c => c.Kind, (c, v) => c.Kind = v);
 
         /// <summary>
         /// Gets or sets the icon to display.
         /// </summary>
         public MaterialIconKind Kind {
-            get => (MaterialIconKind) GetValue(KindProperty);
-            set => SetValue(KindProperty, value);
+            get => _kind;
+            set => SetAndRaise(KindProperty, ref _kind, value);
         }
 
-        private static readonly AvaloniaProperty<string?>
+        private static readonly DirectProperty<MaterialIcon, string?>
             DataProperty = AvaloniaProperty.RegisterDirect<MaterialIcon, string?>(nameof(Data), icon => icon.Data);
 
         private string? _data;
