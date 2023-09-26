@@ -3,11 +3,16 @@
         <TargetFramework>netstandard2.0</TargetFramework>
         <LangVersion>9</LangVersion>
         <Nullable>enable</Nullable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Material.Icons.Avalonia</Title>
-        <Authors>SKProCH</Authors>
+        <Authors>SKProCH;Saevsky-Alexander</Authors>
         <Description>Avalonia control for display material icons from Material.Icons</Description>
+        <PackageProjectUrl>https://github.com/saevsky-alexander/Material.Icons.Avalonia.git</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/AvaloniaUtils/Material.Icons.Avalonia/blob/master/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://nuget.pkg.github.com/saevsky-alexander</RepositoryUrl>
+        <RepositoryType>Git</RepositoryType>
         <PackageTags>material icons material-design google-material avalonia</PackageTags>
-        <PackageVersion>1.2.0</PackageVersion>
+        <PackageVersion>11.0.4</PackageVersion>
     </PropertyGroup>
     <ItemGroup>
         <Compile Update="**\*.xaml.cs">
@@ -19,7 +24,7 @@
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="System.Reactive" Version="5.0.0" />
-        <PackageReference Include="Avalonia" Version="11.0.0-preview6" />
+        <PackageReference Include="Avalonia" Version="11.0.4" />
         <PackageReference Include="Material.Icons" Version="1.1.35" />
     </ItemGroup>
 </Project>

@@ -12,7 +12,7 @@ namespace Material.Icons.Avalonia.Demo.Views {
 
         private void InitializeComponent() {
             AvaloniaXamlLoader.Load(this);
-            DevTools.Attach(this, KeyGesture.Parse("F12"));
+            // DevTools.Attach(this, KeyGesture.Parse("F12"));
         }
     }
 }
